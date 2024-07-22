@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}update{% endblock %}
+{% block content %}
+<div class="form-container">
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+   {{form.as_p}}
+    Password: <input type="password" name="password" placeholder="current password"><br><br>
+    <label for="npassw">New Password</label>
+    <input type="password" name="new password" placeholder="new password" id="npassw"><br><br>
+    <input type="submit" value="Save">
+</form>
+      {% for msg in messages %}
+  <P class="text-center" style="color:red;font-size:20px;">{{msg}}!!</p>
+  {% endfor %}
+</div>
+{% endblock %}

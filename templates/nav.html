@@ -1,0 +1,112 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  {% if user.is_authenticated and not user.is_staff %}
+  <div class="container-fluid">
+     <a class="navbar-brand" href="{% url 'login:user' %}"><i class="fa-regular fa-user"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'movieapp:allmovies' %}">Movie List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'movieapp:mylist' %}">Your List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'edit:add' %}">Add List</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Category
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/">All List</a></li>
+            {% for cat in links %}
+            <li><a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex" role="search" action="{% url 'movieapp:searchresult' %}" method="get">
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <form class="d-flex" action="{% url 'login:logout' %}" method="get" style="padding:20px;">
+        <button class="btn btn-secondary" type="submit">Logout</button>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+  {% if user.is_staff and user.is_authenticated %}
+   <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'movieapp:allmovies' %}">Home</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin_con:all_list' %}">Movie List</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin_con:cat_list' %}">Category List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'edit:addcat' %}">Add Category</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'edit:add' %}">Add Movie</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin_con:user_list' %}">Users</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Category
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/">All List</a></li>
+            {% for cat in links %}
+            <li><a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex" role="search" action="{% url 'movieapp:searchresult' %}" method="get">
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <form class="d-flex" action="{% url 'login:logout' %}" method="get" style="padding:20px;">
+        <button class="btn btn-secondary" type="submit">Logout</button>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+  {% if not user.is_authenticated %}
+<div class="container-fluid">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'movieapp:allmovies' %}">Home</a>
+    </li>
+  </ul>
+     <!-- Center the MovieZone heading -->
+  <div class="d-flex justify-content-end">
+    <form class="d-flex" action="{% url 'login:login' %}" method="get" style="padding:20px;">
+      <button class="btn btn-primary" type="submit">Sign in</button>
+    </form>
+    <form class="d-flex" action="{% url 'login:register' %}" method="get" style="padding:20px;">
+      <button class="btn btn-primary" type="submit">Sign up</button>
+    </form>
+  </div>
+</div>
+  {% endif %}
+</nav>
+
+

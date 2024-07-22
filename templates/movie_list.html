@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+movielist
+{% endblock %}
+{% block content %}
+<div class="row">
+    <h1>Movie List</h1><br>
+    <div class="col-sm-12 col-md-8 col-lg-6">
+
+<table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td><a href="{{movie.get_url}}" class="text-uppercase">{{movie.title}}</a></td>
+                        <td style="text-align:right;"><a class="btn btn-danger"  href="{% url 'edit:delete' d_slug=movie.slug %}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

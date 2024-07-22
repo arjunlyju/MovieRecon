@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+categorylist
+{% endblock %}
+{% block content %}
+<div class="row">
+    <h1>Category</h1><br>
+    <div class="col-sm-12 col-md-8 col-lg-6">
+
+<table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in category %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td><a href="{{cat.get_url}}" class="text-uppercase">{{cat.name}}</a></td>
+                        <td style="text-align:right;"><a class="btn btn-danger"  href="{% url 'edit:delete_cat' c_slug=cat.slug %}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

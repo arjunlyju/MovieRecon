@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+userlist
+{% endblock %}
+{% block content %}
+<div class="row">
+    <h1>Movie List</h1><br>
+    <div class="col-sm-12 col-md-8 col-lg-6">
+
+<table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Fullname</th>
+                    <th scope="col">email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usr in users %}
+                {% if not usr.is_staff %}
+                    <tr>
+                        <th scope="row">{{forloop.counter0}}</th>
+                        <td>{{usr.username}}</td>
+                        <td>{{usr.first_name}} {{usr.last_name}}</td>
+                        <td>{{usr.email}}</td>
+                        <td style="text-align:right;"><a class="btn btn-danger"  href="{% url 'edit:deleteuser' user_id=usr.id %}">Delete</a></td>
+                    </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

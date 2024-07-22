@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+
+        {{movie.name}}
+{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <div style="min-width:18rem">
+            <img src="{{movie.poster.url}}" alt="{{movie.name}}" width="388" height="488">
+        </div>
+    </div>
+
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+        <div>
+            <h1 class="my_prod_title" style="text-transform:uppercase;">{{movie.title}}</h1>
+            <p><b>Release Date</b>: {{movie.release}}</p>
+            <p><b>Movie Description</b> </p>
+            <p class="text-justify my_prod_text" >{{movie.desc}}</p>
+            <p><b>Actor</b>:{{movie.actor}}</p>
+            <p><b>Trailer</b>:<a href="{{movie.link}}">click to watch trailer</a></p>
+            {% if movie.added_by == user and not user.is_staff %}
+            <a class="btn btn-warning" href="{% url 'edit:update' m_slug=movie.slug %}">Update</a>
+            <a class="btn btn-danger" href="{% url 'edit:delete' d_slug=movie.slug %}">Delete</a>
+            {% endif %}
+            {% if user.is_staff %}
+            <a class="btn btn-danger" href="{% url 'edit:delete' d_slug=movie.slug %}">Delete</a>
+            {% endif %}
+
+
+</div>
+    </div>
+
+</div>
+
+{% endblock %}
