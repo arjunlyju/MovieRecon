@@ -47,7 +47,7 @@ def register(request):
                     # Log the user in
                     request.session['new_registration'] = True  # Set session variable
                     login(request,user_authenticated )
-                    return redirect("movieapp:allmovies")
+                    return redirect("login:login")
                 else:
                     messages.error(request, 'Failed to authenticate user.')
                     return redirect("login:register")
