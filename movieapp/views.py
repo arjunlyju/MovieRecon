@@ -109,3 +109,9 @@ def submit_review(request, m_slug):
             return redirect(url)
 
     return redirect(url)
+
+@login_required(login_url='login:login')
+def moviedetails(request, m_slug, c_slug):
+    movie = get_object_or_404(Movie, slug=m_slug)
+    reviews = ReviewRating.objects.filter(movie=movie)
+    return render(request, 'movie.html', {'movie': movie, 'reviews': reviews})

@@ -53,9 +53,28 @@
 
         </form>
  <br>
-
         </div>
     </div>
+            <div>
+                <header class="section-heading">
+                    <h3>Customer Review</h3>
+                </header>
+                <article class="box mb-3">
+                {% if reviews %}
+                    <ul>
+                    {% for review in reviews %}
+                    <li>
+                        <small>By <strong>{{ review.user.username }}</strong> on {{ review.created_at }}</small><br>
+                        <strong>Rating:</strong> {{ review.rating }} / 5<br>
+                        <strong>Review:</strong> {{ review.review }}<br>
+                    </li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No reviews yet. Be the first to review this movie!</p>
+                {% endif %}
+                </article>
+            </div>
 </div>
 
 {% endblock %}
